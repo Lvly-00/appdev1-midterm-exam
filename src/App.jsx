@@ -8,7 +8,7 @@ import Quote from "../public/assets/images/quote.png";
 import ClientImage from "../public/assets/images/client-image.jpg";
 import PricingTable from "../public/assets/images/pricing-table-01.png";
 import WhiteLogo from "../public/assets/images/white-logo.png";
-// import SignInModal from "./components/SignInModal";
+import SignInModal from "./components/SigInModal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
