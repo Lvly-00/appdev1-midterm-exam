@@ -26,18 +26,3 @@ This project showcases frontend development skills using **HTML, CSS, JavaScript
 - Custom CSS enhancements  
 
 ---
-
-## 📂 Project Structure  
-
-```bash
-appdev1-midterm-exam/
-├── public/
-│   ├── assets/
-│   │   ├── css/
-│   │   ├── js/
-│   │   └── images/
-│   └── vendor/
-│       ├── bootstrap/
-│       └── jquery/
-├── index.html
-├── README.md
