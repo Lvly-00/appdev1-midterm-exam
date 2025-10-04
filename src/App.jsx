@@ -8,15 +8,18 @@ import Quote from "../public/assets/images/quote.png";
 import ClientImage from "../public/assets/images/client-image.jpg";
 import PricingTable from "../public/assets/images/pricing-table-01.png";
 import WhiteLogo from "../public/assets/images/white-logo.png";
-import SignInModal from "./components/SigInModal";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
+
+  function handleToggleModal() {
+    setToggleModal(!toggleModal);
+  }
 
   return (
     <>
       {/* ***** Preloader Start ***** */}
-      <div id="js-preloader" className="js-preloader">
+      {/* <div id="js-preloader" className="js-preloader">
         <div className="preloader-inner">
           <span className="dot" />
           <div className="dots">
@@ -25,7 +28,7 @@ function App() {
             <span />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* ***** Preloader End ***** */}
       {/* ***** Header Area Start ***** */}
       <header
@@ -62,15 +65,13 @@ function App() {
                     <a href="#newsletter">Newsletter</a>
                   </li>
                   <li>
-                    <div className="gradient-button">
+                    <div class="gradient-button">
                       <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault(); // prevent page jump
-                          setIsOpen(true);
-                        }}
+                        id="modal_trigger"
+                        href="#modal"
+                        onClick={handleToggleModal}
                       >
-                        <i className="fa fa-sign-in-alt" /> Sign In Now
+                        <i class="fa fa-sign-in-alt"></i> Sign In Now
                       </a>
                     </div>
                   </li>
@@ -85,14 +86,129 @@ function App() {
         </div>
       </header>
       {/* ***** Header Area End ***** */}
-        <div className="container">
-          <div className="row">
-            <div className="col-12 d-flex justify-content-between align-items-center">
-              <h1 className="logo">My Website</h1>
-              {isOpen && <SignInModal onClose={() => setIsOpen(false)} />}
+      <div
+        id="modal"
+        className="popupContainer"
+        style={
+          toggleModal
+            ? {
+                display: "block",
+                position: "fixed",
+                opacity: 1,
+                zIndex: 11000,
+                left: "50%",
+                marginLeft: "-165px",
+                top: 100,
+              }
+            : {
+                display: "none",
+              }
+        }
+      >
+        <div className="popupHeader">
+          <span className="header_title">Login</span>
+          <span className="modal_close" onClick={handleToggleModal}>
+            <i className="fa fa-times" />
+          </span>
+        </div>
+        <section className="popupBody">
+          {/* Social Login */}
+          <div className="social_login">
+            <div className>
+              <a href="#" className="social_box fb">
+                <span className="icon">
+                  <i className="fab fa-facebook" />
+                </span>
+                <span className="icon_title">Connect with Facebook</span>
+              </a>
+              <a href="#" className="social_box google">
+                <span className="icon">
+                  <i className="fab fa-google-plus" />
+                </span>
+                <span className="icon_title">Connect with Google</span>
+              </a>
+            </div>
+            <div className="centeredText">
+              <span>Or use your Email address</span>
+            </div>
+            <div className="action_btns">
+              <div className="one_half">
+                <a href="#" id="login_form" className="btn">
+                  Login
+                </a>
+              </div>
+              <div className="one_half last">
+                <a href="#" id="register_form" className="btn">
+                  Sign up
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+          {/* Username & Password Login form */}
+          <div className="user_login">
+            <form>
+              <label>Email / Username</label>
+              <input type="text" />
+              <br />
+              <label>Password</label>
+              <input type="password" />
+              <br />
+              <div className="checkbox">
+                <input id="remember" type="checkbox" />
+                <label htmlFor="remember">Remember me on this computer</label>
+              </div>
+              <div className="action_btns">
+                <div className="one_half">
+                  <a href="#" className="btn back_btn">
+                    <i className="fa fa-angle-double-left" /> Back
+                  </a>
+                </div>
+                <div className="one_half last">
+                  <a href="#" className="btn btn_red">
+                    Login
+                  </a>
+                </div>
+              </div>
+            </form>
+            <a href="#" className="forgot_password">
+              Forgot password?
+            </a>
+          </div>
+          {/* Register Form */}
+          <div className="user_register">
+            <form>
+              <label>Full Name</label>
+              <input type="text" />
+              <br />
+              <label>Email Address</label>
+              <input type="email" />
+              <br />
+              <label>Password</label>
+              <input type="password" />
+              <br />
+              <div className="checkbox">
+                <input id="send_updates" type="checkbox" />
+                <label htmlFor="send_updates">
+                  Send me occasional email updates
+                </label>
+              </div>
+              <div className="action_btns">
+                <div className="one_half">
+                  <a href="#" className="btn back_btn">
+                    <i className="fa fa-angle-double-left" /> Back
+                  </a>
+                </div>
+                <div className="one_half last">
+                  <a href="#" className="btn btn_red">
+                    Register
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+
       <div
         className="main-banner wow fadeIn"
         id="top"
@@ -833,7 +949,14 @@ function App() {
           </div>
         </div>
       </footer>
-      {/* Scripts */}
+      <div
+        id="lean_overlay"
+        style={
+          toggleModal
+            ? { display: "block", opacity: "0.6" }
+            : { display: "none" }
+        }
+      />
     </>
   );
 }
